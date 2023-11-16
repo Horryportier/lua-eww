@@ -1,5 +1,5 @@
 # lua-eww
-> tldr: lua-eww is simple framework for creating your widgets using lua.
+> tldr: lua-eww is simple framework for creating your widgets in [eww](https://github.com/elkowar/eww) using lua.
 > To be clear its not fully lua based you still have to define windows in your `eww.yuck`
 
 ### demo
