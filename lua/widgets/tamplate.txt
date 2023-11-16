@@ -8,13 +8,11 @@ local label = F.as_widget({
 
 local widget = F.as_widget({
 	orientation = F.VERTICAL,
-	halign = "end",
-	valign = "end",
 	space_evenly = false,
 	children = {
 		 label,
 	}
 }, F.BOX)
 
-M.tmp = widget
+M.widget = widget
 return M

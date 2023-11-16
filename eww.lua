@@ -4,7 +4,7 @@ F = require("../lua/framework")
 WIDGETS = {
 	-- see /lua/widgets/tmp.lua to undersand how to build your own widgets 
 	-- when you undrestand you may delete everything related with tmp widget
-	tmp= require("/lua/widgets/tmp").tmp,
+	tmp= require("/lua/widgets/tmp").widget,
 }
 
 F.from_args(WIDGETS)

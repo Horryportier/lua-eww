@@ -61,5 +61,5 @@ local tmp_widget = F.as_widget({
 	}
 }, F.BOX)
 
-M.tmp = tmp_widget
+M.widget = tmp_widget
 return M
