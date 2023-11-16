@@ -1,0 +1,8 @@
+; place for your variables
+(defpoll home_dir :interval "1000s" `echo  $HOME`)
+; thats how you acces your widgets (name=<name_of_widget>)
+; when you develop your widget set interval to low number 
+; be awere its refreshes your widgets every time its run so input or tmp state might be deleted
+; so after development is over set it to high number
+(defpoll tmp_var :interval "5s" `make get name=tmp`)
+

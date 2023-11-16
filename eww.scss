@@ -1,0 +1,19 @@
+* {
+	all: unset;
+	button:hover {
+		opacity: 0.5;
+	}
+}
+
+.tmp-box {
+	background: #24161A;
+	padding: 1em;
+	border: solid 0.2em #78646D;
+	border-radius: 20px;
+}
+
+.tmp-button {
+	background: #F38ABA;
+	padding: 0.01em;
+	border-radius: 2px;
+}
