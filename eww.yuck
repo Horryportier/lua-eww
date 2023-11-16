@@ -14,13 +14,11 @@
           :height "0%"
           :anchor "top left")
     (expander (box :orientation 'h'  
-                :space_evenly false
                 :halign "start"
                 :valign "start"
                 (label :text 'dummy data dump!')
                 (button :style 'background: black; color: red;' :onclick 'eww kill' 'KILL EWW') 
                 (box :orientation 'v' 
-                     :space_evenly false
                      :valign "start"
                      :halign 'start' 
                   ; put your poll data here 
