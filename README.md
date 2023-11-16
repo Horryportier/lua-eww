@@ -36,9 +36,9 @@ If you need to pass only text then use `content` param
 > this means you need to have dummy widget that holds all the values but you can hide it quite easily.   
 
 ### requirements 
--- lua (there is no lua libralies to worry about)
--- eww 
--- make
+- lua (there is no lua libralies to worry about)
+- eww 
+- make
 
 ## Contribution 
 Of course  you can just make an issue of anything you want to see whith in this tool or any bugs you see. 
