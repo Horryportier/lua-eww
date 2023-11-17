@@ -1,4 +1,4 @@
-M = {
+F = {
 	COMBO_BOX_TEXT = "combo-box-text",
 	EXPANDER = "expander",
 	REVEALER = "revealer",
@@ -99,7 +99,7 @@ Widget_meta = {
 ---@param table table
 ---@param widget_name string
 ---@return table
-function M.as_widget(table, widget_name)
+function F.as_widget(table, widget_name)
 	table.widget_name = widget_name
 	return setmetatable(table, Widget_meta)
 end
@@ -110,13 +110,13 @@ local function send_widget(widget)
 	print(widget)
 end
 
-NO_WIDGET_OF_THAT_NAME = M.as_widget({ text = "no widget of that name" }, M.LABEL)
-NO_WIDGET_PROVIDED = M.as_widget({ text = "no widget provided" }, M.LABEL)
+NO_WIDGET_OF_THAT_NAME = F.as_widget({ text = "no widget of that name" }, F.LABEL)
+NO_WIDGET_PROVIDED = F.as_widget({ text = "no widget provided" }, F.LABEL)
 
 --- takes first cli arg as widget name and tries to find in table of provided widgets
 ---@param widgets table
 ---@return nil
-function M.from_args(widgets)
+function F.from_args(widgets)
 	local get = arg[1];
 	if get == nil then
 		send_widget(NO_WIDGET_PROVIDED)
@@ -130,11 +130,11 @@ function M.from_args(widgets)
 	end
 end
 
-function M.box(children, opts)
+function F.box(children, opts)
 	opts = opts or {}
-	local box = M.as_widget({
+	local box = F.as_widget({
 		children = {}
-	}, M.BOX)
+	}, F.BOX)
 	for _, value in pairs(children) do
 		table.insert(box.children, value)
 	end
@@ -142,21 +142,21 @@ function M.box(children, opts)
 	return box
 end
 
-function M.label(text, opts)
+function F.label(text, opts)
 	opts = opts or {}
-	local label = M.as_widget({
+	local label = F.as_widget({
 		text = text
-	}, M.LABEL)
+	}, F.LABEL)
 	return fill_opts(label, opts)
 end
 
-function M.image(path, size, opts)
+function F.image(path, size, opts)
 	opts = opts or {}
-	local image = M.as_widget({
+	local image = F.as_widget({
 		path = path,
 		image_width = size,
-	}, M.IMAGE)
+	}, F.IMAGE)
 	return fill_opts(image, opts)
 end
 
-return M
+return F

@@ -1,5 +1,5 @@
 F = require("../lua/framework")
-M = {}
+F = {}
 
 local label = F.as_widget({
 	text = "basic template",
@@ -16,5 +16,5 @@ local widget = F.as_widget({
 	}
 }, F.BOX)
 
-M.tmp = widget
-return M
+F.tmp = widget
+return F

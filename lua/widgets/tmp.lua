@@ -1,5 +1,5 @@
 F = require("../lua/framework")
-M = {}
+F = {}
 
 local home_dir = F.as_widget({
 	-- this way you can acces your eww values 
@@ -61,5 +61,5 @@ local tmp_widget = F.as_widget({
 	}
 }, F.BOX)
 
-M.widget = tmp_widget
-return M
+F.widget = tmp_widget
+return F
