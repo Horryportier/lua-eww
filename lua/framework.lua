@@ -20,10 +20,22 @@ M = {
 	TRANSFORM = "transform",
 	CIRCULAR_PROGRESS = "circular-progress",
 	GRAPH = "graph",
-	VERTICAL="v",
-	HORIZONTAL="h",
+	VERTICAL = "v",
+	HORIZONTAL = "h",
+	START = "start",
+	END = "end",
 }
 
+---adds options to table
+---@param table any
+---@param opts any
+---@return any
+local function fill_opts(table, opts)
+	for key, value in pairs(opts) do
+		table[key] = value
+	end
+	return table
+end
 
 
 --- changes any  `_` to  `-` becouse `-` can't be used in lua as value identifier
@@ -116,6 +128,35 @@ function M.from_args(widgets)
 	else
 		send_widget(NO_WIDGET_OF_THAT_NAME)
 	end
+end
+
+function M.box(children, opts)
+	opts = opts or {}
+	local box = M.as_widget({
+		children = {}
+	}, M.BOX)
+	for _, value in pairs(children) do
+		table.insert(box.children, value)
+	end
+	fill_opts(box, opts)
+	return box
+end
+
+function M.label(text, opts)
+	opts = opts or {}
+	local label = M.as_widget({
+		text = text
+	}, M.LABEL)
+	return fill_opts(label, opts)
+end
+
+function M.image(path, size, opts)
+	opts = opts or {}
+	local image = M.as_widget({
+		path = path,
+		image_width = size,
+	}, M.IMAGE)
+	return fill_opts(image, opts)
 end
 
 return M
