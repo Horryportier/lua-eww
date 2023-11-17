@@ -34,7 +34,7 @@
   :geometry (geometry
           :x "-2%"
           :y "5%"
-          :width "1%"
+          :width "10%"
           :height "1%"
           :anchor "top right")
   (tmp_body))
