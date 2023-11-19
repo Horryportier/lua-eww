@@ -124,6 +124,9 @@ function F.from_args(widgets)
 	end
 	local widget = widgets[get]
 	if widget ~= nil then
+		-- if widget is an funciton it will execute said funciton and return nil
+		-- usefull when definging functinos that run only once 
+		if type(widget) == 'function' then widget() return nil end
 		send_widget(widget)
 	else
 		send_widget(NO_WIDGET_OF_THAT_NAME)
