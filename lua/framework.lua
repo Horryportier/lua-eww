@@ -37,6 +37,8 @@ Options_meta = {
 
 --- turns table into options table that implements __add method which takes `a, b` table
 --- and adds or updateds keys in `a` with values of `b`  overithing `a` keys if exist.
+--- ex. local box_opts = F.as_option_table { space_evenly = false, spacing = 4 }; 
+--	F.box_opts({...}, box_opts + { class = "foo", spacing = 8} )
 ---@param t table
 ---@return table Options_meta 
 function F.as_option_table(t)
