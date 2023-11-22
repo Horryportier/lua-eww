@@ -26,10 +26,29 @@ F = {
 	END = "end",
 }
 
+Options_meta = {
+	__add = function (a,b)
+		for key, value in pairs(b) do
+			a[key] = value
+		end
+		return a
+	end
+}
+
+--- turns table into options table that implements __add method which takes `a, b` table
+--- and adds or updateds keys in `a` with values of `b`  overithing `a` keys if exist.
+---@param t table
+---@return table Options_meta 
+function F.as_option_table(t)
+	setmetatable(t, Options_meta)
+	return t
+end
+
+
 ---adds options to table
 ---@param table any
----@param opts any
----@return any
+---@param opts table
+---@return table
 local function fill_opts(table, opts)
 	for key, value in pairs(opts) do
 		table[key] = value
