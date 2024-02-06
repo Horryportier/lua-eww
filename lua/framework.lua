@@ -1,3 +1,11 @@
+function Split(s, delimiter)
+	local result = {};
+	for match in (s .. delimiter):gmatch("(.-)" .. delimiter) do
+		table.insert(result, match);
+	end
+	return result;
+end
+
 F = {
 	COMBO_BOX_TEXT = "combo-box-text",
 	EXPANDER = "expander",
@@ -27,25 +35,30 @@ F = {
 }
 
 Options_meta = {
-	__add = function (a,b)
-		for key, value in pairs(b) do
-			a[key] = value
+	__add = function(a, b)
+		local tmp = {}
+		for key, value in pairs(a) do
+			tmp[key] = value
 		end
-		return a
+		for key, value in pairs(b) do
+			tmp[key] = value
+		end
+		return tmp
 	end
 }
 
+
+
 --- turns table into options table that implements __add method which takes `a, b` table
 --- and adds or updateds keys in `a` with values of `b`  overithing `a` keys if exist.
---- ex. local box_opts = F.as_option_table { space_evenly = false, spacing = 4 }; 
+--- ex. local box_opts = F.as_option_table { space_evenly = false, spacing = 4 };
 --	F.box_opts({...}, box_opts + { class = "foo", spacing = 8} )
 ---@param t table
----@return table Options_meta 
+---@return table Options_meta
 function F.as_option_table(t)
 	setmetatable(t, Options_meta)
 	return t
 end
-
 
 ---adds options to table
 ---@param table any
@@ -138,17 +151,35 @@ NO_WIDGET_PROVIDED = F.as_widget({ text = "no widget provided" }, F.LABEL)
 ---@param widgets table
 ---@return nil
 function F.from_args(widgets)
-	local get = arg[1];
-	if get == nil then
+	local fun = arg[1];
+	local get_args = function()
+		local tmp = {}
+		for index, value in ipairs(arg) do
+			if index ~= 1 then
+				local named = Split(value, ":")
+				if #named == 2 then
+					tmp[named[1]] = named[2]
+				else
+					table.insert(tmp, value)
+				end
+			end
+		end
+		return tmp
+	end
+	local args = get_args()
+	local no_send = args["no_send"]
+
+	if fun == nil then
 		send_widget(NO_WIDGET_PROVIDED)
 		return nil
 	end
-	local widget = widgets[get]
+	local widget = widgets[fun]
 	if widget ~= nil then
-		-- if widget is an funciton it will execute said funciton and return nil
-		-- usefull when definging functinos that run only once 
-		if type(widget) == 'function' then widget() return nil end
-		send_widget(widget)
+		if no_send == nil or no_send == false then
+			send_widget(widget(args))
+		else
+			widget(args)
+		end
 	else
 		send_widget(NO_WIDGET_OF_THAT_NAME)
 	end

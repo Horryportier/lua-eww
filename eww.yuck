@@ -12,8 +12,8 @@
           :y "4%"
           :width "0%"
           :height "0%"
-          :anchor "top left")
-    (expander (box :orientation 'h'  
+          :anchor "top right")
+    (expander :expanded '${debug}' (box :orientation 'h'  
                 :halign "start"
                 :valign "start"
                 (label :text 'dummy data dump!')
@@ -21,8 +21,8 @@
                 (box :orientation 'v' 
                      :valign "start"
                      :halign 'start' 
-                  ; put your poll data here 
-                   home_dir))))
+                  ; put your poll data here
+                  ))))
 
 
 (defwindow tmp_window
@@ -32,11 +32,11 @@
   :wm-ignore false
   :focusable true
   :geometry (geometry
-          :x "-2%"
-          :y "5%"
+          :x "0%"
+          :y "0%"
           :width "10%"
           :height "1%"
-          :anchor "top right")
+          :anchor "bottom right")
   (tmp_body))
 
 

@@ -5,7 +5,7 @@
 ### demo
 simple demo listing your home dir with ability to open files see `/lua/widgets/tmp.lua` and delete when you get the gist of things
 
-<img src="https://raw.githubusercontent.com/Horryportier/lua-eww/main/demo/home_dir.png" width=10% height=10%>
+![showcase](https://raw.githubusercontent.com/Horryportier/lua-eww/main/demo/home_dir.png)
 
 
 ## Installation 

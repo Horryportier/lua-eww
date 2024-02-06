@@ -1,12 +1,6 @@
 F = require("../lua/framework")
 M = {}
 
-local home_dir = F.as_widget({
-	-- this way you can acces your eww values 
-	text = "${home_dir}",
-	-- you can use inline styling 
-	style = "color: #DE6284; padding: 1em; border: dotted 0.1em #78646D; border-radius: 8px; margin-bottom: 1em;"
-}, F.LABEL)
 
 function Split(s, delimiter)
 	local result = {};
@@ -16,9 +10,15 @@ function Split(s, delimiter)
 	return result;
 end
 
+local function full_link(link)
+	local l = io.popen("readlink -f " .. link, "r")
+	if l == nil then return nil end
+	return l:read("*a")
+end
+
 -- this function generates button widget for every file/dir in your home dir
-local function display_files()
-	local cmd = io.popen("ls $HOME")
+local function display_files(folder)
+	local cmd = io.popen("ls " .. folder)
 	if cmd == nil then return nil end
 	local files = Split(cmd:read("a"), '\n')
 	local button_box = F.as_widget({
@@ -40,7 +40,7 @@ local function display_files()
 					-- create script and point to it or,
 					-- just write cmd but that may couse problems if there are 
 					-- characters like " or ' which may not be parsed by eww correctly 
-					onclick = "make tmp_cmd val=" .. value,
+					onclick = string.format("make tmp_cmd path=%s val=%s",folder, value),
 				}, F.BUTTON)
 			)
 		end
@@ -48,18 +48,20 @@ local function display_files()
 	return button_box
 end
 
--- main box for our tmp widget
-local tmp_widget = F.as_widget({
+-- main function for our tmp widget you can pass arguments in your's vars.yuck in that format -> name:value 
+local tmp_widget = function (t)
+return F.as_widget({
 	class = "tmp-box",
 	orientation = F.VERTICAL,
 	halign = "end",
 	valign = "end",
 	space_evenly = false,
 	children = {
-		home_dir,
-		display_files()
+		F.label(full_link(t.path)),
+		display_files(full_link(t.path))
 	}
 }, F.BOX)
+end
 
 M.widget = tmp_widget
 return M

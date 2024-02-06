@@ -1,5 +1,5 @@
 get: 
-	@lua eww.lua $(name)
+	@lua ./eww.lua $(name) $(args)
 open_dev:
 	@eww open $(win) -c .
 open:
@@ -13,6 +13,6 @@ daemon:
 daemon_dev:
 	@eww daemon -c .
 tmp_cmd:
-	@open ~/$(val)
+	@open $(path)/$(val)
 new:
 	@./new.sh $(name)
